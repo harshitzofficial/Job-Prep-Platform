@@ -46,7 +46,7 @@
 
 This project was created as part of a **YouTube tutorial series** to teach developers how to build production-quality AI applications from scratch. It's a perfect learning resource covering React, Express, SCSS, and LLM API integration all in one place.
 
-> 💡 **Tutorial Series:** Follow along on YouTube with [Ankur Prajapati](https://github.com/ankurdotio) to build this project step by step.
+> 💡 **Tutorial Series:** Follow along on YouTube with [Harshit Singh](https://github.com/harshitzofficial) to build this project step by step.
 
 ---
 
@@ -139,7 +139,7 @@ This project was created as part of a **YouTube tutorial series** to teach devel
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/ankurdotio/interview-ai-yt.git
+git clone https://github.com/harshitzofficial/Job-Prep-Platform.git
 cd interview-ai-yt
 
 # 2. Set up the Backend
