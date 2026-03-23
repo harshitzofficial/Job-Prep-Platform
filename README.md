@@ -12,7 +12,7 @@
 
 <br/>
 
-![Interview AI Demo](<img width="1919" height="919" alt="image" src="https://github.com/user-attachments/assets/d5aa1741-3133-4eb1-b9ff-16eb2d63dc08" />)
+<img width="1919" height="919" alt="image" src="https://github.com/user-attachments/assets/d5aa1741-3133-4eb1-b9ff-16eb2d63dc08" />
 
 </div>
 
