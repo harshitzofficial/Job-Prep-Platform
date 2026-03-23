@@ -2,14 +2,6 @@
 
 # 🤖 Interview AI
 
-### Your Personal AI-Powered Interview Coach
-
-[![GitHub stars](https://img.shields.io/github/stars/ankurdotio/interview-ai-yt?style=for-the-badge&color=FFD700)](https://github.com/ankurdotio/interview-ai-yt/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/ankurdotio/interview-ai-yt?style=for-the-badge&color=1F6FEB)](https://github.com/ankurdotio/interview-ai-yt/forks)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-[![JavaScript](https://img.shields.io/badge/JavaScript-69.8%25-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![SCSS](https://img.shields.io/badge/SCSS-29.7%25-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)
-
 <br/>
 
 **Practice job interviews with an intelligent AI that asks real questions, evaluates your answers, and gives you actionable feedback — all for free.**
