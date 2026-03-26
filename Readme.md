@@ -1,102 +1,292 @@
-# Interview AI Pro
+<div align="center">
 
-Interview AI Pro is an advanced, AI-powered interview preparation platform. It allows candidates to upload their resumes and input target job descriptions to instantly receive tailored, bespoke preparation strategies designed to help them ace their upcoming interviews.
+# 🤖 Interview AI Pro
 
-## 🌟 Features
+<br/>
 
-- **Deep Resume Analysis**: The system extracts text from PDF/DOCX resumes and maps the user's skills directly to the requirements of the job description.
-- **Targeted Strategy Generation**: Uses Google's state-of-the-art **Gemini** generative AI models to provide specific behavioral and technical questions, identifying their intentions and how to answer them optimally.
-- **Instant Preparation Roadmaps**: Automatically generates day-by-day preparation plans tailored perfectly to the candidate's skill gaps and the job's requirements.
-- **AI Resume Builder**: Capabilities to regenerate and transform raw resume data into highly professional, ATS-friendly HTML/PDF resumes explicitly tailored for the target role.
-- **Interactive UI**: A modern, sleek glassmorphism UI offering a premium user experience.
+**Elevate your career with AI. Instantly generate bespoke interview strategies, targeted questions, and actionable preparation roadmaps based on your resume and target job description.**
+
+<br/>
+
+[🚀 Quick Start](#-quick-start) · [✨ Features](#-features) · [🏗️ Architecture](#️-architecture) · [📖 How It Works](#-how-it-works) · [🤝 Contributing](#-contributing)
+
+<br/>
+
+<img width="1919" height="919" alt="image" src="https://github.com/user-attachments/assets/d5aa1741-3133-4eb1-b9ff-16eb2d63dc08" />
+
+</div>
 
 ---
 
-## 🏗️ Architecture & Tech Stack
+## 📋 Table of Contents
 
-This project follows a decoupled Client-Server architecture.
+- [About The Project](#-about-the-project)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Architecture](#️-architecture)
+- [Quick Start](#-quick-start)
+- [Project Structure](#-project-structure)
+- [Configuration](#️-configuration)
+- [How It Works](#-how-it-works)
+- [Contributing](#-contributing)
+- [Roadmap](#️-roadmap)
+- [License](#-license)
+
+---
+
+## 🎯 About The Project
+
+**Interview AI Pro** is an advanced, full-stack application that acts as your personal interview coach. Built with **React + Vite** on the frontend and **Node.js + Express** on the backend, it bridges the gap between your career history and the job you want. 
+
+By simply uploading your resume and pasting a job description, the application uses **Google's Gemini AI** to logically map your skills to the requirements, generate a match score, formulate targeted technical and behavioral questions, and instantly build a day-by-day study roadmap.
+
+This project is a perfect showcase of combining modern frontend glassmorphism design with powerful backend AI schemas and PDF generation.
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 📄 **Smart Resume Parsing** | Extracts and analyzes text directly from uploaded PDF and DOCX files. |
+| 🎯 **Targeted Strategy** | Generates custom technical and behavioral questions specifically relevant to the candidate and role. |
+| 📊 **Match Scoring** | Instantly evaluates how well your profile aligns with the job description. |
+| ⚡ **Actionable Roadmaps** | Creates comprehensive, day-by-day preparation plans based on identified skill gaps. |
+| 🖨️ **AI Resume Builder** | Re-formats and generates ATS-friendly, highly professional resumes exported as PDFs via Puppeteer. |
+| 🎨 **Premium Glassmorphism UI** | A sleek, responsive, dark-themed design built with modern SCSS techniques. |
+| 🛡️ **Structured Output** | Uses Zod schemas to ensure the AI always returns exact, predictable JSON responses. |
+
+---
+
+## 🛠 Tech Stack
 
 ### Frontend
-Built with modern web technologies, prioritizing speed, aesthetics, and user experience.
-- **Framework**: React 19 bootstrapped with Vite
-- **Routing**: React Router v7
-- **Styling**: SCSS (Sass) featuring a custom CSS-variable-based glassmorphism design system
-- **State/API Handling**: React Context API & Axios
+![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-Latest-646CFF?style=flat-square&logo=vite&logoColor=white)
+![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=flat-square&logo=sass&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 
 ### Backend
-A robust RESTful API that handles authentication, file parsing, and AI integrations.
-- **Core Runtime**: Node.js & Express.js
-- **Database**: MongoDB (managed via Mongoose)
-- **Authentication**: JWT (JSON Web Tokens) via HTTP-only cookies
-- **AI Integration**: `@google/genai` (utilizing `gemini-3-flash-preview`)
-- **Validation**: Zod (Ensures the AI output strictly adheres to expected JSON structures)
-- **File Parsing**: `multer` for upload handling and `pdf-parse` to extract text from candidate resumes
-- **PDF Generation**: `puppeteer` to render AI-generated HTML resumes into downloadable A4 PDFs
+![Node.js](https://img.shields.io/badge/Node.js-LTS-339933?style=flat-square&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-5.x-000000?style=flat-square&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?style=flat-square&logo=mongodb&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/Google_GenAI-API-4285F4?style=flat-square&logo=google&logoColor=white)
+![Puppeteer](https://img.shields.io/badge/Puppeteer-PDFs-40B5A4?style=flat-square&logo=puppeteer&logoColor=white)
 
 ---
 
-## 🚀 Getting Started
+## 🏗️ Architecture
 
-Follow these steps to set up the project locally.
+```
+┌───────────────────────────────────────────────────────────────┐
+│                         USER BROWSER                          │
+│                                                               │
+│   ┌────────────────────────────────────────────────────────┐  │
+│   │            React Frontend  (Vite + SCSS)               │  │
+│   │   Provides Job Description, Resume & Self Description  │  │
+│   └───────────────────────┬────────────────────────────────┘  │
+│                           │  HTTP / REST API (Axios)          │
+└───────────────────────────┼───────────────────────────────────┘
+                            │
+                            ▼
+┌───────────────────────────────────────────────────────────────┐
+│              Node.js + Express Backend                        │
+│                                                               │
+│   ┌───────────────┐  ┌───────────────┐  ┌─────────────────┐   │
+│   │ Multer + PDF  │  │  Controllers  │  │   AI Service    │   │
+│   │ Parser        │→ │  Business     │→ │  ai.service.js  │   │
+│   │ (Uploads)     │  │  Logic        │  │  (Zod + Gemini) │   │
+│   └───────────────┘  └───────┬───────┘  └───────┬─────────┘   │
+└─────────────────────────────── │─────────────── │─────────────┘
+                                 │                │  HTTPS
+                                 ▼                ▼
+                     ┌──────────────────┐ ┌─────────────────────────┐
+                     │   MongoDB        │ │   Google Gemini API     │
+                     │   (DB Storage)   │ │  gemini-3-flash-preview │
+                     └──────────────────┘ └─────────────────────────┘
+```
+
+### Data Flow
+
+1. User uploads a Resume (`.pdf` / `.docx`) and inputs a Target Job Description in the React UI.
+2. Frontend sends a `POST` request with the configuration to the Express backend.
+3. Backend extracts the text from the uploaded file using `pdf-parse`.
+4. The `ai.service.js` constructs a prompt with the parsed details alongside strict **Zod** schema instructions.
+5. The Gemini API analyzes the profile vs. job description and returns a validated JSON response.
+6. The Backend stores the response in MongoDB and sends it back to the Frontend.
+7. The Frontend dynamically renders the preparation plan, skill gaps, and custom questions.
+
+---
+
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js (v18+ recommended)
-- MongoDB (Local instance or MongoDB Atlas)
-- Google Gemini API Key
 
-### 1. Backend Setup
-Navigate into the backend directory and install dependencies:
+- **Node.js** v18 or higher — [Download](https://nodejs.org/)
+- **npm** v9 or higher (bundled with Node.js)
+- A **Google Gemini API key** (free) → [Get one here](https://aistudio.google.com/app/apikey)
+- A **MongoDB URI** (free cluster via MongoDB Atlas)
+
+### Installation
+
 ```bash
+# 1. Clone the repository
+git clone https://github.com/harshitzofficial/Job-Prep-Platform.git
+cd interview-ai-yt-main
+
+# 2. Set up the Backend
 cd Backend
 npm install
-```
 
-Create a `.env` file in the `Backend` directory and define your environment variables:
-```env
-PORT=3000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
-GOOGLE_GENAI_API_KEY=your_gemini_api_key
-```
+# 3. Configure your environment variables
+# Create a .env file and add your credentials (see Configuration section below)
+cp .env.example .env
 
-Start the backend server:
-```bash
+# 4. Start the backend server
 npm run dev
-```
-*The server will start on `http://localhost:3000`.*
+# ✅ Backend running at http://localhost:3000
 
-### 2. Frontend Setup
-Open a new terminal, navigate to the frontend directory, and install dependencies:
-```bash
-cd Frontend
+# 5. Open a new terminal — set up the Frontend
+cd ../Frontend
 npm install
+
+# 6. Start the frontend dev server
+npm run dev
+# ✅ Frontend running at http://localhost:5173
 ```
 
-Start the Vite development server:
-```bash
-npm run dev
-```
-*The React app will be served on `http://localhost:5173`.*
+### Verify It's Working
+
+Open [http://localhost:5173](http://localhost:5173) in your browser. You should see the Interview AI Pro home screen.
 
 ---
 
-## 🧠 How the AI Engine Works
+## 📁 Project Structure
 
-The core of this application resides in `Backend/src/services/ai.service.js`. 
-Instead of relying on unpredictable plain-text responses, the app utilizes **Zod** schema definitions to force the Gemini model to return strongly typed JSON objects through the `responseSchema` configuration parameter.
+```
+interview-ai-yt-main/
+│
+├── 📂 Backend/
+│   ├── src/
+│   │   ├── config/                 # Database configuration
+│   │   ├── controllers/            # API Route logic
+│   │   ├── middleware/             # Auth & Error handling
+│   │   ├── models/                 # Mongoose Schemas (User, Blacklist, etc.)
+│   │   ├── routes/                 # Express Router configs
+│   │   └── services/
+│   │       └── ai.service.js       # 🧠 Core AI & schema integration
+│   ├── server.js                   # Express application entry point
+│   ├── .env                        # Environment variable configuration
+│   └── package.json
+│
+└── 📂 Frontend/
+    ├── src/
+    │   ├── features/               # Modularized feature directories (Auth, Interview, Public)
+    │   │   ├── auth/
+    │   │   ├── interview/          # Home/Dashboard & Interview results views
+    │   │   └── public/             # Landing page components
+    │   ├── style/                  # Global SCSS style definitions
+    │   ├── components/             # Reusable global components (Navbar, Footer, etc.)
+    │   ├── app.routes.jsx          # React Router configurations
+    │   ├── App.jsx                 # Main layout & context providers
+    │   └── main.jsx                # Vite entry point
+    ├── index.html
+    ├── vite.config.js
+    └── package.json
+```
 
-This guarantees that the generated interview reports will perfectly map to the React frontend components without parsing errors, securely providing:
-1. `matchScore`: Percentage rating of candidate vs job description.
-2. `technicalQuestions` & `behavioralQuestions`: Arrays of targeted Q&As.
-3. `skillGaps`: Identified areas the candidate must improve.
-4. `preparationPlan`: A structured timeline to get the candidate interview-ready.
+---
+
+## ⚙️ Configuration
+
+### Backend — `.env`
+
+Create a `.env` file inside the `Backend/` directory:
+
+```env
+# ── Server ──────────────────────────────────────────────────
+PORT=3000
+NODE_ENV=development
+
+# ── Database ────────────────────────────────────────────────
+MONGODB_URI=your_mongodb_connection_string
+
+# ── Authentication ──────────────────────────────────────────
+JWT_SECRET=your_jwt_secret_key
+
+# ── AI Provider ─────────────────────────────────────────────
+GOOGLE_GENAI_API_KEY=your_google_gemini_api_key_here
+```
+
+> ⚠️ **Never commit your `.env` file.**
+
+---
+
+## 🧠 How It Works
+
+### Structured AI Outputs with Zod (`ai.service.js`)
+
+Unlike standard AI text generation, **Interview AI Pro** ensures 100% predictable integration by combining the `@google/genai` library with **Zod** schema translation to enforce strict JSON output formatting:
+
+```javascript
+const interviewReportSchema = z.object({
+    matchScore: z.number(),
+    technicalQuestions: z.array(z.object({
+        question: z.string(),
+        intention: z.string(),
+        answer: z.string()
+    })),
+    // ... Additional schema definitions
+});
+
+const response = await ai.models.generateContent({
+    model: "gemini-3-flash-preview",
+    contents: prompt,
+    config: {
+        responseMimeType: "application/json",
+        responseSchema: zodToJsonSchema(interviewReportSchema),
+    }
+});
+```
+This powerful configuration guarantees your React frontend never breaks due to invalidly formatted strings.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
+Contributions are what make the open-source community great. Any contribution you make is **hugely appreciated**!
 
-## 📝 License
+1. **Fork** the repository
+2. Create your feature branch: `git checkout -b feature/AmazingFeature`
+3. Commit your changes: `git commit -m 'Add some AmazingFeature'`
+4. Push to the branch: `git push origin feature/AmazingFeature`
+5. Open a **Pull Request**
 
-This project is licensed under the ISC License.
+---
+
+## 🗺️ Roadmap
+
+- [x] Integrate Google Gemini Flash for Interview Generation
+- [x] Setup Zod Schema Validation for AI Outputs
+- [x] Complete the Glassmorphism Frontend Layout
+- [x] Resume Parsing via PDF-parse
+- [x] Automated Resume Generation via Puppeteer
+- [ ] Add Mock Audio/Video Interviews
+- [ ] Implement LeetCode-style Code Execution environments
+- [ ] Add real-time WebSocket integrations for peer interviews
+
+---
+
+## 📄 License
+
+Distributed under the ISC License. 
+
+---
+
+<div align="center">
+
+Made with ❤️ by Harshit Singh
+
+⭐ If this project helped you, please give it a star — it really helps!
+
+</div>
