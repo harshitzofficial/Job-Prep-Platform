@@ -1,7 +1,7 @@
 import axios from "axios"
 const api = axios.create({
     baseURL: "http://localhost:3000",
-    withCredentials: true
+    withCredentials: true  //server has access to the cookie and can set cookie in the browser
 })
 
 export async function register({ username, email, password }) {
@@ -45,6 +45,7 @@ export async function logout() {
         return response.data
 
     } catch (err) {
+        console.log(err)
 
     }
 }

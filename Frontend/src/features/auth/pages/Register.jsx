@@ -22,7 +22,7 @@ const Register = () => {
         
         // 3. Only navigate if success is true
         if (result.success) {
-            navigate("/")
+            navigate("/dashboard")
         } else {
             // 4. Set the error message to display to the user
             setError(result.message)

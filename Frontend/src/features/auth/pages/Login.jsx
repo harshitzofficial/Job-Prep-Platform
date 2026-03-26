@@ -20,7 +20,7 @@ const Login = () => {
         // 2. ONLY navigate if success is true
         // This prevents "fake" logins from moving away from the login page
         if (success) {
-            navigate('/');
+            navigate('/dashboard');
         } else {
             alert("Invalid credentials. Please try again.");
         }

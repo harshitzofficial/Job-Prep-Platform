@@ -6,6 +6,8 @@ import Home from "./features/interview/pages/Home";
 import Interview from "./features/interview/pages/Interview";
 
 
+import Landing from "./features/public/pages/Landing";
+
 export const router = createBrowserRouter([
     {
         path: "/login",
@@ -17,6 +19,10 @@ export const router = createBrowserRouter([
     },
     {
         path: "/",
+        element: <Landing />
+    },
+    {
+        path: "/dashboard",
         element: <Protected><Home /></Protected>
     },
     {
