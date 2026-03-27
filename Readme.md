@@ -30,9 +30,6 @@
 - [API Reference](#-api-reference)
 - [Key Modules Explained](#-key-modules-explained)
 - [Routing](#-routing)
-- [State Management](#-state-management)
-- [Contributing](#-contributing)
-- [Roadmap](#%EF%B8%8F-roadmap)
 
 ---
 
@@ -617,7 +614,7 @@ The AI service uses the `@google/genai` SDK with `gemini-3-flash-preview`. It le
 
 ---
 
-## 🛣️ Routing
+##  Routing
 
 ### Frontend Routes (`app.routes.jsx`)
 
@@ -635,13 +632,8 @@ The AI service uses the `@google/genai` SDK with `gemini-3-flash-preview`. It le
 | `/api/auth` | `auth.routes.js` |
 | `/api/interview` | `interview.routes.js` |
 
----
+## Documentation
 
-## 🧠 State Management
+For a deeper dive into the codebase, indexing, and comprehensive project wiki, visit our official documentation:
 
-The app uses **React Context API** with two providers:
-
-### `AuthContext` (`auth.context.jsx`)
-| State | Type | Description |
-|---|---|---|
-| `user` | `object \| null` | Currently logged-
+👉 **[View Job Prep Platform on DeepWiki](https://deepwiki.com/harshitzofficial/Job-Prep-Platform)**
