@@ -117,6 +117,7 @@ This project is a perfect showcase of combining modern frontend glassmorphism de
 6. The Backend stores the response in MongoDB and sends it back to the Frontend.
 7. The Frontend dynamically renders the preparation plan, skill gaps, and custom questions.
 
+```
 1. User Input
    ├─ Upload Resume (PDF/DOCX)
    ├─ Enter Job Description
@@ -155,6 +156,9 @@ This project is a perfect showcase of combining modern frontend glassmorphism de
         ▼
 7. User Display
    └─ Dashboard Results Visualization
+```
+
+---
 
 ---
 
