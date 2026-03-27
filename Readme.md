@@ -109,10 +109,10 @@ The project was built as part of a YouTube tutorial series by [Harshit Singh](ht
 │                                                                    │
 │   ┌────────────────────────────────────────────────────────────┐   │
 │   │        React 19 Frontend (Vite + SCSS)                     │   │
-│   │   ┌──────────┐  ┌──────────────┐  ┌────────────────────┐  │   │
-│   │   │  Auth    │  │  Interview   │  │  Protected Route   │  │   │
-│   │   │ Feature  │  │   Feature    │  │  Guard Component   │  │   │
-│   │   └──────────┘  └──────────────┘  └────────────────────┘  │   │
+│   │   ┌──────────┐  ┌──────────────┐  ┌────────────────────┐   │   │
+│   │   │  Auth    │  │  Interview   │  │  Protected Route   │   │   │
+│   │   │ Feature  │  │   Feature    │  │  Guard Component   │   │   │
+│   │   └──────────┘  └──────────────┘  └────────────────────┘   │   │
 │   │         Context Providers (AuthContext, InterviewContext)  │   │
 │   └────────────────────────────┬───────────────────────────────┘   │
 │                                │  HTTP / REST (Axios, credentials) │
@@ -144,9 +144,9 @@ The project was built as part of a YouTube tutorial series by [Harshit Singh](ht
 │  │ user / blacklist / │     │  generateInterviewReport()       │   │
 │  │  interviewReport   │     │  generateResumePdf()             │   │
 │  └────────┬───────────┘     └──────────────┬───────────────────┘   │
-└───────────┼──────────────────────────────── │ ─────────────────────┘
-            │                                 │  HTTPS
-            ▼                                 ▼
+└───────────┼────────────────────────────────│ ──────────────────────┘
+            │                                │  HTTPS
+            ▼                                ▼
    ┌─────────────────┐            ┌────────────────────────┐
    │    MongoDB      │            │  Google Gemini AI API  │
    │  (Mongoose ODM) │            │  gemini-3-flash-preview│
@@ -168,11 +168,11 @@ Incoming Request
        │
        ▼
   Middlewares
-  ┌──────────────────────────┬──────────────────────┐
+  ┌──────────────────────────┬───────────────────────┐
   │   auth.middleware.js     │  file.middleware.js   │
   │  JWT verify + blacklist  │  multer memoryStorage │
   │  check → sets req.user   │  3 MB PDF limit       │
-  └──────────────────────────┴──────────────────────┘
+  └──────────────────────────┴───────────────────────┘
        │
        ▼
   Controllers
