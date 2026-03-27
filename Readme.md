@@ -632,8 +632,6 @@ The AI service uses the `@google/genai` SDK with `gemini-3-flash-preview`. It le
 | `/api/auth` | `auth.routes.js` |
 | `/api/interview` | `interview.routes.js` |
 
-## Documentation
 
-For a deeper dive into the codebase, indexing, and comprehensive project wiki, visit our official documentation:
 
-👉 **[View Job Prep Platform on DeepWiki](https://deepwiki.com/harshitzofficial/Job-Prep-Platform)**
+👉 **[DeepWiki](https://deepwiki.com/harshitzofficial/Job-Prep-Platform)**
