@@ -117,6 +117,45 @@ This project is a perfect showcase of combining modern frontend glassmorphism de
 6. The Backend stores the response in MongoDB and sends it back to the Frontend.
 7. The Frontend dynamically renders the preparation plan, skill gaps, and custom questions.
 
+1. User Input
+   ├─ Upload Resume (PDF/DOCX)
+   ├─ Enter Job Description
+   └─ Provide Self Assessment
+        │
+        ▼
+2. Frontend Processing
+   └─ Validate inputs
+   └─ Create FormData
+        │
+        ▼
+3. Backend Processing
+   ├─ Receive and validate file
+   ├─ Parse resume text
+   ├─ Extract information
+        │
+        ▼
+4. AI Processing (Gemini)
+   ├─ Send structured prompt
+   ├─ Apply Zod schema validation
+   ├─ Get guaranteed JSON response
+        │
+        ▼
+5. Data Generation
+   ├─ Match Score Calculation
+   ├─ Skill Gap Analysis
+   ├─ Question Generation
+   ├─ Roadmap Creation
+        │
+        ▼
+6. Storage & Response
+   ├─ Store in MongoDB
+   ├─ Generate PDF Resume
+   ├─ Return to Frontend
+        │
+        ▼
+7. User Display
+   └─ Dashboard Results Visualization
+
 ---
 
 ## 🚀 Quick Start
