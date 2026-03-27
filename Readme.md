@@ -33,7 +33,6 @@
 - [State Management](#-state-management)
 - [Contributing](#-contributing)
 - [Roadmap](#%EF%B8%8F-roadmap)
-- [License](#-license)
 
 ---
 
