@@ -2,11 +2,11 @@
 
 <div align="center">
 
-# 🚀 Job Prep Platform
+# 🚀 ResumeMatch Pro
 
-**An AI-powered, full-stack interview preparation platform. Upload your resume, paste a job description, and receive a personalized interview strategy — technical questions, behavioral questions, skill-gap analysis, a day-wise preparation roadmap, and a tailored, ATS-optimized resume PDF.**
+**An AI-powered, full-stack interview preparation platform. Upload your resume, paste a job description, and receive a personalized interview strategy.**
 
-[✨ Features](#-features) · [🏗️ Architecture](#%EF%B8%8F-architecture) · [📁 Project Structure](#-project-structure) · [⚙️ Configuration](#%EF%B8%8F-configuration) · [📖 API Reference](#-api-reference) · [🚀 Quick Start](#-quick-start)
+[✨ Features](#-features) · [🏗️ Architecture](#%EF%B8%8F-architecture) · [📁 Project Structure](#-project-structure)
 
 </div>
 
