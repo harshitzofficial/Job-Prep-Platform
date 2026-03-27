@@ -208,37 +208,134 @@ Open [http://localhost:5173](http://localhost:5173) in your browser. You should 
 ## 📁 Project Structure
 
 ```
-interview-ai-yt-main/
+Job-Prep-Platform/
 │
-├── 📂 Backend/
+├── 📂 Backend/                           # Node.js + Express Server
 │   ├── src/
-│   │   ├── config/                 # Database configuration
-│   │   ├── controllers/            # API Route logic
-│   │   ├── middleware/             # Auth & Error handling
-│   │   ├── models/                 # Mongoose Schemas (User, Blacklist, etc.)
-│   │   ├── routes/                 # Express Router configs
-│   │   └── services/
-│   │       └── ai.service.js       # 🧠 Core AI & schema integration
-│   ├── server.js                   # Express application entry point
-│   ├── .env                        # Environment variable configuration
-│   └── package.json
+│   │   ├── config/
+│   │   │   └── db.js                    # MongoDB connection setup
+│   │   │
+│   │   ├── controllers/                 # Route handler logic
+│   │   │   ├── authController.js
+│   │   │   ├── userController.js
+│   │   │   ├── interviewController.js
+│   │   │   └── resumeController.js
+│   │   │
+│   │   ├── middleware/
+│   │   │   ├── auth.js                  # JWT verification
+│   │   │   ├── errorHandler.js          # Global error handling
+│   │   │   └── fileUpload.js            # Multer configuration
+│   │   │
+│   │   ├── models/                      # Mongoose schemas
+│   │   │   ├── User.js
+│   │   │   ├── Interview.js
+│   │   │   ├── Resume.js
+│   │   │   └── TokenBlacklist.js
+│   │   │
+│   │   ├── routes/                      # Express Router configs
+│   │   │   ├── authRoutes.js
+│   │   │   ├── userRoutes.js
+│   │   │   ├── interviewRoutes.js
+│   │   │   └── resumeRoutes.js
+│   │   │
+│   │   ├── services/
+│   │   │   ├── ai.service.js            # 🧠 Core AI Integration + Zod
+│   │   │   ├── fileService.js           # File parsing & handling
+│   │   │   ├── resumeService.js         # Resume generation (Puppeteer)
+│   │   │   └── userService.js           # User business logic
+│   │   │
+│   │   ├── utils/
+│   │   │   ├── schemas.js               # Zod validation schemas
+│   │   │   ├── validators.js            # Input validators
+│   │   │   └── constants.js             # App constants
+│   │   │
+│   │   ├── templates/
+│   │   │   └── resumeTemplate.html      # Resume HTML template
+│   │   │
+│   │   └── server.js                    # Express app initialization
+│   │
+│   ├── .env                             # Environment variables
+│   ├── .env.example                     # Environment template
+│   ├── .gitignore
+│   ├── package.json
+│   └── README.md
 │
-└── 📂 Frontend/
+└── 📂 Frontend/                          # React + Vite Application
     ├── src/
-    │   ├── features/               # Modularized feature directories (Auth, Interview, Public)
+    │   ├── features/                    # Feature-based modules
     │   │   ├── auth/
-    │   │   ├── interview/          # Home/Dashboard & Interview results views
-    │   │   └── public/             # Landing page components
-    │   ├── style/                  # Global SCSS style definitions
-    │   ├── components/             # Reusable global components (Navbar, Footer, etc.)
-    │   ├── app.routes.jsx          # React Router configurations
-    │   ├── App.jsx                 # Main layout & context providers
-    │   └── main.jsx                # Vite entry point
-    ├── index.html
-    ├── vite.config.js
-    └── package.json
-```
+    │   │   │   ├── components/
+    │   │   │   │   ├── LoginForm.jsx
+    │   │   │   │   └── RegisterForm.jsx
+    │   │   │   ├── pages/
+    │   │   │   │   ├── LoginPage.jsx
+    │   │   │   │   └── RegisterPage.jsx
+    │   │   │   └── hooks/
+    │   │   │       └── useAuth.js
+    │   │   │
+    │   │   ├── interview/
+    │   │   │   ├── components/
+    │   │   │   │   ├── ResumeUpload.jsx
+    │   │   │   │   ├── JobDescriptionInput.jsx
+    │   │   │   │   ├── ResultsPanel.jsx
+    │   │   │   │   └── RoadmapDisplay.jsx
+    │   │   │   ├── pages/
+    │   │   │   │   ├── Dashboard.jsx
+    │   │   │   │   ├── InterviewPage.jsx
+    │   │   │   │   └── ResultsPage.jsx
+    │   │   │   └── hooks/
+    │   │   │       └── useInterview.js
+    │   │   │
+    │   │   └── public/
+    │   │       ├── components/
+    │   │       │   ├── Hero.jsx
+    │   │       │   ├── Features.jsx
+    │   │       │   └── CallToAction.jsx
+    │   │       └── pages/
+    │   │           └── LandingPage.jsx
+    │   │
+    │   ├── components/                  # Global reusable components
+    │   │   ├── Navbar.jsx
+    │   │   ├── Footer.jsx
+    │   │   ├── Loading.jsx
+    │   │   ├── ErrorBoundary.jsx
+    │   │   └── ProtectedRoute.jsx
+    │   │
+    │   ├── styles/                      # Global SCSS
+    │   │   ├── variables.scss           # Colors, fonts, spacing
+    │   │   ├── mixins.scss              # Reusable mixins
+    │   │   ├── glassmorphism.scss       # Glassmorphism effects
+    │   │   ├── animations.scss          # Keyframe animations
+    │   │   └── global.scss              # Base styles
+    │   │
+    │   ├── hooks/                       # Custom React hooks
+    │   │   ├── useApi.js
+    │   │   └── useLocalStorage.js
+    │   │
+    │   ├── context/                     # React Context providers
+    │   │   ├── AuthContext.jsx
+    │   │   └── InterviewContext.jsx
+    │   │
+    │   ├── utils/                       # Utility functions
+    │   │   ├── api.js                   # Axios instance & helpers
+    │   │   ├── formatting.js
+    │   │   └── validation.js
+    │   │
+    │   ├── App.jsx                      # Main layout component
+    │   ├── app.routes.jsx               # Route definitions
+    │   └── main.jsx                     # Vite entry point
+    │
+    ├── public/                          # Static assets
+    │   └── images/
+    │
+    ├── index.html                       # HTML template
+    ├── vite.config.js                   # Vite configuration
+    ├── .env.example
+    ├── .gitignore
+    ├── package.json
+    └── README.md
 
+```
 ---
 
 ## ⚙️ Configuration
