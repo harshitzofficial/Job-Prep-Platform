@@ -1,8 +1,5 @@
-Here is a comprehensive `README.md` you can copy directly into your repository. Every section is backed by the actual source code discovered in the codebase.
-
 ---
 
-````markdown
 <div align="center">
 
 # 🚀 Job Prep Platform
