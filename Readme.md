@@ -1,3 +1,4 @@
+
 ---
 
 <div align="center">
@@ -6,11 +7,9 @@
 
 **An AI-powered, full-stack interview preparation platform. Upload your resume, paste a job description, and receive a personalized interview strategy.**
 
-[✨ Features](#-features) · [🏗️ Architecture](#%EF%B8%8F-architecture) · [📁 Project Structure](#-project-structure)
+[✨ Features](#-features) · [🏗️ Architecture](#%EF%B8%8F-architecture) · [📁 Project Structure](#-structure)
 
 </div>
-
----
 
 ## 📋 Table of Contents
 
