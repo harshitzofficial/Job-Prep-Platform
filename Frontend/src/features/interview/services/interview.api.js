@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://hireprep-ai-w2y1.onrender.com",
+    baseURL: "https://hireprep-ai-backend-i5j0.onrender.com",
     withCredentials: true,
 })
 
