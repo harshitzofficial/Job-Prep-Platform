@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../style/interview.scss'
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate, useParams } from 'react-router'
+import { searchLiveJobs } from '../services/interview.api'
 
 
 
@@ -9,6 +10,7 @@ const NAV_ITEMS = [
     { id: 'technical', label: 'Technical Questions', icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>) },
     { id: 'behavioral', label: 'Behavioral Questions', icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>) },
     { id: 'roadmap', label: 'Road Map', icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11" /></svg>) },
+    { id: 'jobs', label: 'Find Jobs', icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>) },
 ]
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -55,6 +57,110 @@ const RoadMapDay = ({ day }) => (
         </ul>
     </div>
 )
+// ── Job Search Sub-component ──────────────────────────────────────────────────
+const JobSearchSection = () => {
+    const [location, setLocation] = useState('');
+    const [jobs, setJobs] = useState([]);
+    const [isSearching, setIsSearching] = useState(false);
+    const [searchedQuery, setSearchedQuery] = useState('');
+
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        if (!location) return;
+
+        setIsSearching(true);
+        try {
+            const data = await searchLiveJobs(location);
+            setJobs(data.jobs || []);
+            setSearchedQuery(data.searchQuery);
+        } catch (error) {
+            console.error("Failed to fetch jobs:", error);
+        } finally {
+            setIsSearching(false);
+        }
+    };
+
+    return (
+        <section className="job-search-section">
+            <div className='content-header'>
+                <h2>Find Your Next Role</h2>
+                {jobs.length > 0 && <span className='content-header__count'>{jobs.length} matches</span>}
+            </div>
+            
+            <p style={{ color: '#a0a0a0', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+                We'll analyze your uploaded resume and find the best active job listings in your area.
+            </p>
+
+            <form onSubmit={handleSearch} style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+                <input 
+                    type="text" 
+                    placeholder="Enter city or 'remote' (e.g., New York, NY)" 
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    style={{ 
+                        flex: 1, 
+                        padding: '0.8rem 1rem', 
+                        borderRadius: '8px', 
+                        border: '1px solid #333',
+                        backgroundColor: '#1a1a1a', // Matching your dark theme
+                        color: 'white',
+                        outline: 'none'
+                    }}
+                />
+                <button type="submit" className="button primary-button" disabled={isSearching}>
+                    {isSearching ? "Searching..." : "Search Jobs"}
+                </button>
+            </form>
+
+            {searchedQuery && (
+                <div style={{ marginBottom: '1.5rem', padding: '1rem', backgroundColor: 'rgba(0, 255, 136, 0.1)', borderRadius: '8px', border: '1px solid rgba(0, 255, 136, 0.2)' }}>
+                    <p style={{ margin: 0, color: '#00ff88', fontSize: '0.9rem' }}>
+                        🤖 AI searched based on your resume for: <strong>{searchedQuery}</strong>
+                    </p>
+                </div>
+            )}
+
+            <div className='job-list' style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {jobs.map((job, index) => (
+                    <div key={index} className='q-card' style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        <div className='q-card__header' style={{ cursor: 'default' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <h3 style={{ margin: 0, color: '#fff', fontSize: '1.1rem' }}>{job.job_title}</h3>
+                                <span style={{ color: '#00ff88', fontSize: '0.85rem', fontWeight: 'bold', marginTop: '4px' }}>
+                                    {job.employer_name} • {job.job_city}, {job.job_state}
+                                </span>
+                            </div>
+                        </div>
+                        <div className='q-card__body' style={{ marginTop: 0, paddingTop: '0.5rem' }}>
+                            <p style={{ color: '#ccc', fontSize: '0.9rem', lineHeight: '1.5' }}>
+                                {job.job_description?.substring(0, 200)}...
+                            </p>
+                            <a 
+                                href={job.job_apply_link} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="button"
+                                style={{ 
+                                    display: 'inline-block',
+                                    marginTop: '1rem', 
+                                    backgroundColor: '#2a2a2a', 
+                                    color: '#fff', 
+                                    textDecoration: 'none',
+                                    border: '1px solid #444',
+                                    padding: '0.5rem 1rem',
+                                    borderRadius: '6px',
+                                    fontSize: '0.85rem'
+                                }}
+                            >
+                                Apply Externally ↗
+                            </a>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
+    );
+}
 
 // ── Main Component ────────────────────────────────────────────────────────────
 const Interview = () => {
@@ -154,6 +260,9 @@ const Interview = () => {
                                 ))}
                             </div>
                         </section>
+                    )}
+                    {activeNav === 'jobs' && (
+                        <JobSearchSection />
                     )}
                 </main>
 

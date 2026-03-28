@@ -1,6 +1,6 @@
 # High-Level System Architecture
 
-This outlines the high-level architecture of your **Interview AI Pro** platform. You can visualize this directly using **Mermaid diagrams**. 
+This outlines the high-level architecture of your **HirePrep AI** platform. You can visualize this directly using **Mermaid diagrams**. 
 
 > [!TIP]
 > If you want to build or view architectures inside your editor, I highly recommend installing the VS Code extension **"Mermaid Markdown Syntax Highlighting"** combined with **"Markdown Preview Mermaid Support"** or the **"Draw.io Integration"** extension.

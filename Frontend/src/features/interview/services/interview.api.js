@@ -57,3 +57,8 @@ export const generateResumePdf = async ({ interviewReportId }) => {
 
     return response.data
 }
+
+export const searchLiveJobs = async (location) => {
+    const response = await api.get(`/api/jobs/search?location=${location}`);
+    return response.data;
+};
