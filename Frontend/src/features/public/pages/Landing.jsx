@@ -111,6 +111,13 @@ const Landing = () => {
               seconds using state-of-the-art LLMs.
             </p>
           </div>
+          <div className="feature-card glass-panel">
+            <div className="feature-icon">🎙️</div>
+            <h3>Live Voice Interviews</h3>
+            <p>
+              Experience real-time, voice-enabled mock interviews. Direct the AI's focus and practice your delivery with instant conversational feedback.
+            </p>
+          </div>
         </div>
       </section>
 

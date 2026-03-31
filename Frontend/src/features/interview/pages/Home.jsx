@@ -5,17 +5,40 @@ import { useNavigate } from 'react-router'
 
 const Home = () => {
 
-    const { loading, generateReport,reports } = useInterview()
+    const { loading, generateReport, reports } = useInterview()
     const [ jobDescription, setJobDescription ] = useState("")
     const [ selfDescription, setSelfDescription ] = useState("")
+    
+    // 1. Add state to track the selected file
+    const [resumeFile, setResumeFile] = useState(null)
     const resumeInputRef = useRef()
-
+    
     const navigate = useNavigate()
 
+    // 2. Add handler functions for file input changes
+    const handleFileUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setResumeFile(file);
+        }
+    };
+
+    const handleRemoveFile = (e) => {
+        e.preventDefault(); 
+        setResumeFile(null);
+        // Reset the input value so the same file can be selected again if needed
+        if (resumeInputRef.current) {
+            resumeInputRef.current.value = "";
+        }
+    };
+
     const handleGenerateReport = async () => {
-        const resumeFile = resumeInputRef.current.files[ 0 ]
+        // Use the state variable instead of reading the ref directly
         const data = await generateReport({ jobDescription, selfDescription, resumeFile })
-        navigate(`/interview/${data._id}`)
+        
+        if (data && data._id) {
+            navigate(`/interview/${data._id}`)
+        }
     }
 
     if (loading) {
@@ -69,20 +92,52 @@ const Home = () => {
                             <h2>Your Profile</h2>
                         </div>
 
-                        {/* Upload Resume */}
+                        {/* Upload Resume Section */}
                         <div className='upload-section'>
                             <label className='section-label'>
                                 Upload Resume
                                 <span className='badge badge--best'>Best Results</span>
                             </label>
-                            <label className='dropzone' htmlFor='resume'>
-                                <span className='dropzone__icon'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 16 12 12 8 16" /><line x1="12" y1="12" x2="12" y2="21" /><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" /></svg>
-                                </span>
-                                <p className='dropzone__title'>Click to upload or drag &amp; drop</p>
-                                <p className='dropzone__subtitle'>PDF or DOCX (Max 5MB)</p>
-                                <input ref={resumeInputRef} hidden type='file' id='resume' name='resume' accept='.pdf,.docx' />
-                            </label>
+                            
+                            {/* 3. Conditional Rendering for the Dropzone */}
+                            <div className="upload-container">
+                                {!resumeFile ? (
+                                    <label className='dropzone upload-dropzone' htmlFor='resume'>
+                                        <span className='dropzone__icon'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 16 12 12 8 16" /><line x1="12" y1="12" x2="12" y2="21" /><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" /></svg>
+                                        </span>
+                                        <div className="dropzone-content">
+                                            <p className='dropzone__title'>Click to upload or drag &amp; drop</p>
+                                            <span className='dropzone__subtitle'>PDF or DOCX (Max 5MB)</span>
+                                        </div>
+                                        <input 
+                                            ref={resumeInputRef} 
+                                            hidden 
+                                            type='file' 
+                                            id='resume' 
+                                            name='resume' 
+                                            accept='.pdf,.docx' 
+                                            onChange={handleFileUpload} 
+                                        />
+                                    </label>
+                                ) : (
+                                    <div className="uploaded-file-card">
+                                        <div className="file-info">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff88" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                                <polyline points="14 2 14 8 20 8"></polyline>
+                                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                                <polyline points="10 9 9 9 8 9"></polyline>
+                                            </svg>
+                                            <span className="file-name">{resumeFile.name}</span>
+                                        </div>
+                                        <button className="remove-file-btn" onClick={handleRemoveFile} aria-label="Remove file">
+                                            ✕
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                         {/* OR Divider */}

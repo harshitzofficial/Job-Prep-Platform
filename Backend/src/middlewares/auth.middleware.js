@@ -1,11 +1,10 @@
 const jwt = require("jsonwebtoken")
 const tokenBlacklistModel = require("../models/blacklist.model")
 
-
-
 async function authUser(req, res, next) {
 
-    const token = req.cookies.token
+    // 🚨 THE FIX: Intelligently check both Cookies and Bearer Headers
+    const token = req.cookies?.token || req.headers.authorization?.split(' ')[1];
 
     if (!token) {
         return res.status(401).json({
@@ -38,6 +37,5 @@ async function authUser(req, res, next) {
     }
 
 }
-
 
 module.exports = { authUser }

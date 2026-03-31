@@ -1,3 +1,4 @@
+@use "sass:color";
 // ── Variables ────────────────────────────────────────────────────────────────
 $bg-page:        transparent; /* Rely on global root variables */
 $bg-card:        rgba(255, 255, 255, 0.03); /* Glass base */
@@ -300,7 +301,7 @@ $font-stack:     'Outfit', system-ui, sans-serif;
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, $accent 0%, darken($accent, 10%) 100%);
+    background: linear-gradient(135deg, $accent 0%, color.adjust($accent, $lightness: -10%) 100%);
     color: #fff;
     font-size: 0.9rem;
     font-weight: 600;
@@ -319,36 +320,86 @@ $font-stack:     'Outfit', system-ui, sans-serif;
     }
 }
 
-.recent-reports{
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+.recent-reports {
+    margin-top: 3rem;
     width: 100%;
-    max-width: 900px;
 
-    .reports-list{
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        color: #fff;
+    }
+
+    .reports-list {
         display: flex;
-        gap: 0.75rem;
-        flex-wrap: wrap;
+        gap: 1.5rem;
+        
+        /* 🚨 THE MAGIC PROPERTIES FOR SCROLLING */
+        overflow-x: auto; 
+        flex-wrap: nowrap; 
+        
+        padding-bottom: 1rem; // Breathing room for the scrollbar
+        list-style: none;
+        margin: 0;
+        padding-left: 0;
 
-        .report-item{
-            background-color: $bg-card;
-            border: 1px solid $border-color;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            cursor: pointer;
-            flex-shrink: 0;
-
-            .match-score {
-                font-size: 0.8rem;
-                font-weight: 600;
-                color: $accent;
-                align-items: flex-start;
+        /* Customizing the Scrollbar to match your theme */
+        &::-webkit-scrollbar {
+            height: 8px;
+        }
+        &::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 136, 0.3); // Theme green
+            border-radius: 10px;
+            
+            &:hover {
+                background: rgba(0, 255, 136, 0.6);
             }
+        }
+    }
+
+    .report-item {
+        /* 🚨 Prevent cards from shrinking */
+        flex: 0 0 auto; 
+        width: 250px; // Gives every card a uniform, readable width
+        
+        /* Your existing card styles below (adjust as needed) */
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 1.5rem;
+        cursor: pointer;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+
+        &:hover {
+            transform: translateY(-5px);
+            border-color: #00ff88;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            color: #fff;
+            margin: 0 0 0.5rem 0;
+            line-height: 1.4;
+        }
+
+        .report-meta {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .match-score {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0;
+            
+            &.score--high { color: #00ff88; } // Green
+            &.score--mid { color: #ffb800; } // Yellow
+            &.score--low { color: #ff4444; } // Red
         }
     }
 }
@@ -367,6 +418,90 @@ $font-stack:     'Outfit', system-ui, sans-serif;
 
         &:hover {
             color: $text-primary;
+        }
+    }
+}
+.upload-container {
+    width: 100%;
+
+    // The existing dashed box
+    .upload-dropzone {
+        display: block;
+        width: 100%;
+        padding: 2rem;
+        border: 2px dashed #333;
+        border-radius: 12px;
+        background: #1a1a1a;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        .dropzone-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+
+            p {
+                color: #fff;
+                margin: 0;
+                font-weight: 500;
+            }
+            span {
+                color: #666;
+                font-size: 0.85rem;
+            }
+        }
+    }
+
+    // The NEW Success Card
+    .uploaded-file-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.2rem;
+        border: 1px solid rgba(0, 255, 136, 0.3);
+        border-radius: 12px;
+        background: rgba(0, 255, 136, 0.05);
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .file-name {
+                color: #00ff88;
+                font-weight: 500;
+                font-size: 0.95rem;
+                max-width: 250px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        .remove-file-btn {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            border-radius: 50%;
+            transition: all 0.2s;
+
+            &:hover {
+                color: #ff4444;
+                background: rgba(255, 68, 68, 0.1);
+            }
         }
     }
 }

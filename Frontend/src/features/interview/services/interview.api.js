@@ -62,3 +62,15 @@ export const searchLiveJobs = async (location) => {
     const response = await api.get(`/api/jobs/search?location=${location}`);
     return response.data;
 };
+
+
+// Change these to include /api
+export const getLiveQuestions = async (data) => {
+    const response = await api.post('/api/interview/live/questions', data); // Added /api
+    return response.data;
+};
+
+export const evaluateInterview = async (data) => {
+    const response = await api.post('/api/interview/live/evaluate', data); // Added /api
+    return response.data;
+};

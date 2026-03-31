@@ -9,7 +9,7 @@ async function getJobSearchQueryFromResume(resumeText) {
         Return ONLY the job title string. No explanations.
         Resume: ${resumeText}`;
 
-        const response = await ai.getGenerativeModel({ model: "gemini-1.5-flash" })
+        const response = await ai.getGenerativeModel({ model: "gemini-2.0-flash" })
             .generateContent(prompt);
 
         return response.response.text().trim();
